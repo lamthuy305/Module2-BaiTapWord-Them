@@ -28,6 +28,56 @@ public class StudentManagement {
         students.remove(index);
     }
 
+
+    public void bubbleSort() {
+        boolean needNextPass = true;
+        for (int i = 1; i < size() && needNextPass; i++) {
+            needNextPass = false;
+            for (int j = 0; j < size() - i; j++) {
+                if (students.get(j).getDiem() > students.get(j + 1).getDiem()) {
+                    Student temp = students.get(j);
+                    updateStudent(j, students.get(j + 1));
+                    updateStudent(j + 1, temp);
+                    needNextPass = true;
+                }
+            }
+        }
+    }
+
+    public void selectionSort() {
+        int min;
+        for (int i = 0; i < size() - 1; i++) {
+            min = i;
+
+            for (int j = i + 1; j < size(); j++) {
+                if (students.get(j).getDiem() < students.get(min).getDiem()) {
+                    min = j;
+                }
+            }
+            if (min != i) {
+                Student temp = students.get(min);
+                updateStudent(min, students.get(i));
+                updateStudent(i, temp);
+            }
+        }
+    }
+
+
+    public void insertionSort() {
+        int pos;
+        for (int i = 1; i < size(); i++) {
+            pos = i;
+            Student temp = students.get(pos);
+
+            while (pos > 0 && temp.getDiem() < students.get(pos - 1).getDiem()) {
+                updateStudent(pos, students.get(pos - 1));
+                pos--;
+            }
+            updateStudent(pos, temp);
+        }
+    }
+
+
     public int timKiemTuyenTinh(int maSV) {
         int index = -1;
         for (int i = 0; i < size(); i++) {
@@ -38,14 +88,48 @@ public class StudentManagement {
         return index;
     }
 
-//    public int timKiemNhiPhan(int maSV) {
-//        int index = -1;
-//
-//        return index;
-//    }
 
+    public int timKiemNhiPhan(int maSV) {
+        bubbleSortMaSV();
+        int low = 0;
+        int high = size() - 1;
+        while (high >= low) {
+            int mid = (low + high) / 2;
+            if (maSV < students.get(mid).getMaSV())
+                high = mid - 1;
+            else if (maSV == students.get(mid).getMaSV())
+                return mid;
+            else
+                low = mid + 1;
+        }
+        return -1;
+    }
+
+    public void bubbleSortMaSV() {
+        boolean needNextPass = true;
+        for (int i = 1; i < size() && needNextPass; i++) {
+            needNextPass = false;
+            for (int j = 0; j < size() - i; j++) {
+                if (students.get(j).getMaSV() > students.get(j + 1).getMaSV()) {
+                    Student temp = students.get(j);
+                    updateStudent(j, students.get(j + 1));
+                    updateStudent(j + 1, temp);
+                    needNextPass = true;
+                }
+            }
+        }
+    }
 
     public void displayStudent(int index) {
         System.out.println(students.get(index));
     }
+
+//    public int checkMaSV(int maSV) {  //Check xem mã SV đã xuất hiện chưa
+//        for (int i = 0; i < size(); i++) {
+//            if (students.get(i).getMaSV() == maSV) {
+//                return i;
+//            }
+//        }
+//        return -1;
+//    }
 }

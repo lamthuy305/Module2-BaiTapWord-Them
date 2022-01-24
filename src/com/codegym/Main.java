@@ -7,6 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         StudentManagement studentManagement = new StudentManagement();
+        getStudentManagement(studentManagement);
         int choice1 = -1;
         do {
             menu();
@@ -47,14 +48,20 @@ public class Main {
                         switch (choice2) {
                             case 1: {
                                 System.out.println("Sắp xếp nổi bọt");
+                                studentManagement.bubbleSort();
+                                studentManagement.displayAllStudent();
                                 break;
                             }
                             case 2: {
                                 System.out.println("Sắp xếp chọn");
+                                studentManagement.selectionSort();
+                                studentManagement.displayAllStudent();
                                 break;
                             }
                             case 3: {
                                 System.out.println("Sắp xếp chèn");
+                                studentManagement.insertionSort();
+                                studentManagement.displayAllStudent();
                                 break;
                             }
                             case 0: {
@@ -81,10 +88,10 @@ public class Main {
                             case 1: {
                                 scanner.nextLine();
                                 System.out.println("Tìm kiếm tuyến tính");
-                                System.out.println("Nhập mã sinh viên");
+                                System.out.println("Nhập mã sinh viên: ");
                                 int maSv = scanner.nextInt();
                                 int index = studentManagement.timKiemTuyenTinh(maSv);
-                                if (index == -1)    {
+                                if (index == -1) {
                                     System.out.println("Mã sinh viên không có trong danh sách");
                                 } else {
                                     studentManagement.displayStudent(index);
@@ -93,6 +100,14 @@ public class Main {
                             }
                             case 2: {
                                 System.out.println("Tìm kiếm nhị phân");
+                                System.out.println("Nhập mã sinh viên: ");
+                                int maSV = scanner.nextInt();
+                                int index = studentManagement.timKiemNhiPhan(maSV);
+                                if (index == -1) {
+                                    System.out.println("Mã sinh viên không có trong danh sách");
+                                } else {
+                                    studentManagement.displayStudent(index);
+                                }
                                 break;
                             }
                             case 0: {
@@ -117,6 +132,20 @@ public class Main {
         } while (choice1 != 0);
 
     }
+
+    private static void getStudentManagement(StudentManagement studentManagement) {
+        Student student1 = new Student("Nguyễn Văn A", 1, "Hà Nội", "G1", 90);
+        Student student2 = new Student("Nguyễn Văn B", 4, "Hà Nam", "G1", 95);
+        Student student3 = new Student("Nguyễn Văn C", 2, "Nam Định", "G1", 80);
+        Student student4 = new Student("Nguyễn Văn D", 3, "Thái Bình", "G1", 99);
+        Student student5 = new Student("Nguyễn Văn E", 5, "Ninh Bình", "G1", 88);
+        studentManagement.addNewStudent(student1);
+        studentManagement.addNewStudent(student2);
+        studentManagement.addNewStudent(student3);
+        studentManagement.addNewStudent(student4);
+        studentManagement.addNewStudent(student5);
+    }
+
 
     private static void menuCase5() {
         System.out.println("1. Sắp xếp nổi bọt");
