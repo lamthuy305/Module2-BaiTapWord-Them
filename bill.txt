@@ -1,0 +1,5 @@
+Nguyễn Văn C, 2, Nam Định, G1, 80.0
+Nguyễn Văn E, 5, Ninh Bình, G1, 88.0
+Nguyễn Văn A, 1, Hà Nội, G1, 90.0
+Nguyễn Văn B, 4, Hà Nam, G1, 95.0
+Nguyễn Văn D, 3, Thái Bình, G1, 99.0

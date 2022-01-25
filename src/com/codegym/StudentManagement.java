@@ -1,5 +1,6 @@
 package com.codegym;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,12 +125,40 @@ public class StudentManagement {
         System.out.println(students.get(index));
     }
 
-//    public int checkMaSV(int maSV) {  //Check xem mã SV đã xuất hiện chưa
-//        for (int i = 0; i < size(); i++) {
-//            if (students.get(i).getMaSV() == maSV) {
-//                return i;
-//            }
-//        }
-//        return -1;
-//    }
+    public int checkMaSV(int maSV) {  //Check xem mã SV đã xuất hiện chưa
+        for (int i = 0; i < size(); i++) {
+            if (students.get(i).getMaSV() == maSV) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void writeToFile(String path) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        for (Student student : students) {
+            bufferedWriter.write(student.toString() + "\n");
+        }
+        bufferedWriter.close();
+        fileWriter.close();
+    }
+
+    public void readFile(String path) throws IOException {
+        FileReader fileReader = new FileReader(path);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line = null;
+        while ((line = bufferedReader.readLine()) != null) {
+            String[] lines = line.split(",");
+            String name = lines[0].trim();
+            int maSV = Integer.parseInt(lines[1].trim());
+            String adress = lines[2].trim();
+            String lop = lines[3].trim();
+            double diem = Double.parseDouble(lines[4].trim());
+            Student student = new Student(name,maSV,adress,lop,diem);
+            this.addNewStudent(student);
+        }
+        bufferedReader.close();
+        fileReader.close();
+    }
 }

@@ -1,14 +1,20 @@
 package com.codegym;
 
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         StudentManagement studentManagement = new StudentManagement();
-        getStudentManagement(studentManagement);
         int choice1 = -1;
+        try {
+            studentManagement.readFile("bill.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         do {
             menu();
             choice1 = scanner.nextInt();
@@ -128,22 +134,13 @@ public class Main {
                     System.out.println("Nhập lại");
                 }
             }
-
+            try {
+                studentManagement.writeToFile("bill.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } while (choice1 != 0);
 
-    }
-
-    private static void getStudentManagement(StudentManagement studentManagement) {
-        Student student1 = new Student("Nguyễn Văn A", 1, "Hà Nội", "G1", 90);
-        Student student2 = new Student("Nguyễn Văn B", 4, "Hà Nam", "G1", 95);
-        Student student3 = new Student("Nguyễn Văn C", 2, "Nam Định", "G1", 80);
-        Student student4 = new Student("Nguyễn Văn D", 3, "Thái Bình", "G1", 99);
-        Student student5 = new Student("Nguyễn Văn E", 5, "Ninh Bình", "G1", 88);
-        studentManagement.addNewStudent(student1);
-        studentManagement.addNewStudent(student2);
-        studentManagement.addNewStudent(student3);
-        studentManagement.addNewStudent(student4);
-        studentManagement.addNewStudent(student5);
     }
 
 

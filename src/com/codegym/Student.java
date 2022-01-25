@@ -60,6 +60,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student " + this.name + ", mã sinh viên " + this.maSV + ", quê quán " + this.adress + ", lớp " + this.lop + ", điểm " + this.diem;
+        return this.name + ", " + this.maSV + ", " + this.adress + ", " + this.lop + ", " + this.diem;
     }
 }
